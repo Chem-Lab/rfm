@@ -6,7 +6,6 @@ local_testing
 coverage
 *doc
 pkg
-*.gem
 *.bak
 *.md.html
 Gemfile.lock
