@@ -88,7 +88,12 @@ module Rfm
 
         case result
         when "text"      then value
-        when "number"    then BigDecimal.new(value.gsub!(',','.').to_s)
+        when "number"    then BigDecimal.new(value.to_s.gsub(/[^\d#{Regexp.quote(',')}]/,'').tr(',','.'))
+         # if value.include? ","
+          #    BigDecimal.new(value.gsub!(',','.').to_s)
+         # else
+         #  BigDecimal.new(value.to_s)
+         #end
         when "date"      then Date.strptime(value, resultset_meta.date_format)
         when "time"      then DateTime.strptime("1/1/-4712 #{value}", "%m/%d/%Y #{resultset_meta.time_format}")
         when "timestamp" then DateTime.strptime(value, resultset_meta.timestamp_format)
